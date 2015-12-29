@@ -1,0 +1,35 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: arial;
+}
+
+#wrapper{
+	width: 600px;
+	border: 1px solid gray;
+	left: 20%;
+	top: 10%;
+	position: absolute;
+}
+	h3 {
+		margin-left: 180px;
+		padding: 20px;
+	}
+
+#chat_box{
+	width: 400px;
+	height: 400px;
+	border: 1px solid gray;
+	margin-left: 100px;
+	overflow: scroll;
+}
+
+form{
+	margin-left: 180px;
+	padding: 15px;
+}
+	form input {
+		display: block;
+		margin-left: 70px;
+		margin-top: 10px;
+	}

@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title>Group Chat</title>
+	<link rel="stylesheet" type="text/css" href="chat.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type = "text/javascript">
+    	$(document).ready(function(){
+    		var socket = io.connect();
+
+    		var person = prompt("Those who wish to enter must give their name");
+    		console.log(person);
+    		socket.emit('created_new_user', {name: person});
+
+    		socket.on('joining_room', function(data){
+    			console.log('welcome to the room');
+    			$("#chat_box").append("<p><b>Welcome to the Room, "+data.name+".</b></p>")
+    		});
+
+    		$('form').submit(function(){
+    			socket.emit('posting_content', {comment: $('#comment').val()})
+    		})
+
+    		socket.on('global_message', function(user){
+    			console.log(user);
+    			$('#chat_box').append("<p>"+user.name+" said: "+user.comment+"</p>")
+    		});
+    	})
+    </script>
+</head>
+<body>
+	<div id = "wrapper">
+		<h3>Welcome to the Room</h3>
+			<div id = "chat_box">
+				<% for(var i in chat) { %>
+					<p><%= chat[i] %></p>
+			<%	} %>
+			</div>
+			<form onsubmit = "return false">
+				<textarea id = 'comment' rows = 2 cols = 30></textarea>
+				<input type = "submit" value = "enter text">
+			</form>
+		
+	</div>
+</body>
+</html>
